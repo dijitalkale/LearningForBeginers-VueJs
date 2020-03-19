@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script> <!-- vuejs sitesinden indirdiğimiz development script -->
+</head>
+
+<body>
+    <div id="app">
+        <!-- genelde app adında oluşturulur div -->
+        <h3>{{title}}</h3> <!-- django template gibi değişkenleri kullanabiliriz -->
+        <button>{{ button_title }}</button>
+        <p>{{paragraph}}</p>
+        <p v-text='paragraph'></p> <!-- yukardakinin aynısını burda da yapabiliriz -->
+        <a v-bind:href="link"> BaysanSoft</a> <!-- attribute'lar içerisinde string inter pollution kullanılamaz. Bu sebeple v-bind diyerek o attribute'ı bağlıyoruz  -->
+        <a :href="link"> BaysanSoft</a> <!-- v-bind yerine de ':' kullanabiliriz -->
+        <!-- <p>{{detail}}</p>  -> bu şekilde gösterim yanlış -->
+        <p v-html='detail'></p> <!-- göstereceğimiz html'i veriririz ve iş biter :) -->
+    </div>
+    <!-- string inter pollution bize js ve html kodlarından arındırılmış veri verir -->
+    <script>
+        new Vue({ // bir Vue instance oluşturuyoruz ve içine json constructor yolluyoruz
+            el: '#app', // kontrol edeceğimiz elementin adı.
+            data: { // template içinde kullanabileceğimiz değişkenleri data prop içerisinde tanımlarız
+                title: 'Test Başlık',
+                button_title: 'Tıkla Gelsin',
+                paragraph: 'paragraf yazısı güzel gibi gözüküyor',
+                link:'http://www.baysansoft.com',
+                detail:'<b>Burası detaydır</b>'
+            }
+        });
+    </script>
+</body>
+
+</html>

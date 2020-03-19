@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" v-on:keypress='keyp($event)'> -->
+        <input type="text" @keypress='keyp($event)'> <!-- istersek v-on yerine @ kullanabiliriz  -->
+        <!-- basıldığında keyp() method çalışsın. $event -> reserve kelimedir. bize basılan tuşu döner -->
+        <button v-on:click='arttir()'>Arttır</button> <!-- v-on:event_name='gerceklesecek_fonksiyon()' -->
+        <p>{{sayi}}</p>
+    </div>
+
+
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                sayi: 0,
+            },
+            methods: { // methodlar buraya yazılır
+                arttir() {
+                    this.sayi++;
+                },
+                keyp(e) {
+                    if (e.key === 'Enter') { // fonksiyona parametre olarak gelen eventin key prop'u Enter ise
+                        // eğer entera basıldı mı kontrolü yapmak istemezsek 'event modifiers' konusuna bakabiliriz (vuejs.org). @keypress.enter='keyp($event'
+                        //console.log('Entera basıldı');
+                        let eklenecek = parseInt(e.target.value); // gelen eventin target propunun value propu input box value'yi verir
+                        this.sayi += eklenecek;
+                        e.target.value = ''; // ekledikten sonra input boxı temizliyoruz
+                    }
+                }
+            }
+        })
+    </script>
+
+
+
+</body>
+
+</html>
